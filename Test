@@ -1,1 +1,56 @@
-start --> finish
+
+%%{init: {"flowchart": {"defaultRenderer": "elk"}} }%%
+flowchart TD
+
+
+
+
+
+
+
+   start((Start))
+   
+    checkPaP{RA: does the request contain a PaP?}
+    
+    pathRequestPreBooking["Path request in pre-booking Sender:RA Recipients: C-OSS and PIM^ PTID: PRID, ROID, TRIDv00 MS: Creation (1); TOR: Request (2) TOI: pre-booking in progress"]
+    
+    pathRequestNo["Path request Sender: RA Recipients: PIM and C‑OSS PTID: PRID, ROID, TRIDv00 MS: Creation (1); TOR: Request (2) TOI: Request ready (4) or
+    harmonisation complete"]
+    
+    cossReject{Does the C‑OSS reject request?}
+    
+    cossDeletion["PathRequestMessage deletion Sender: C‑OSS Recipients: PIM PTID: PRID, ROID, TRIDv00 MS: deletion (3); TOR: Request (2) TOI: 21 alternative not 
+    available"]
+     
+     pathAfterPreBooking["Path request after the pre‑booking Sender: C‑OSS Recipients: PIM PTID: PRID, ROID, TRIDv00 MS: Creation (1); TOR: Request (2) TOI: Request 
+    ready (4) or harmonisation complete"]
+    
+    prebookingTrigger{Did the pre‑booking trigger the creation of at least one other path request?}
+    
+    newPath["New path request after the pre‑booking phase Sender: C‑OSS Recipients: PIM PTID: “new” PRID, ROID, TRIDv00 RPTID: PRID (initial PRID) MS: Creation (1);
+    TOR: Request (2) TOI: Request ready (4) or harmonisation complete"]
+    
+    imCheck((IM: Check PathRequest Message))
+    
+    nextSteps["The next steps of the path request sequence follow."]
+    
+  
+    
+    start --> checkPaP
+    checkPaP -- Yes --> pathRequestPreBooking
+    checkPaP -- No --> pathRequestNo
+    pathRequestNo --> imCheck
+    pathRequestPreBooking --> cossReject
+    cossReject -- Yes --> cossDeletion 
+    cossReject -- No --> pathAfterPreBooking --> prebookingTrigger
+    prebookingTrigger -- Yes --> newPath --> imCheck
+    prebookingTrigger -- No --> imCheck
+    imCheck --> nextSteps
+    
+    classDef Blue fill:#2962FF;
+    classDef Green fill:#00C853;
+    
+    class imCheck Blue;
+    class checkPaP,pathRequestPreBooking,pathRequestNo Green;
+
+
