@@ -47,47 +47,7 @@ start((Start))
     class imCheck Blue;
     class checkPaP,pathRequestPreBooking,pathRequestNo Green;
 
-    click start "Test#L11" "Start node code"
-    click checkPaP "Test#L13" "checkPaP code"
-    click pathRequestPreBooking "Test#L15" "pathRequestPreBooking code"
-    click pathRequestNo "Test#L17" "pathRequestNo code"
-    click cossReject "Test#L20" "cossReject code"
-    click cossDeletion "Test#L22" "cossDeletion code"
-    click pathAfterPreBooking "Test#L25" "pathAfterPreBooking code"
-    click prebookingTrigger "Test#L28" "prebookingTrigger code"
-    click newPath "Test#L30" "newPath code"
-    click imCheck "Test#L33" "imCheck code"
-    click nextSteps "Test#L35" "nextSteps code"
- (cd "$(git rev-parse --show-toplevel)" && git apply --3way <<'EOF' 
-diff --git a/mermaid.mmd b/mermaid.mmd
-index 171d5f2bcab01955fa2026bb1d1150ac1bc96294..c3794fd2ed22d97e2e20f6072b903e60e86964f3 100644
---- a/mermaid.mmd
-+++ b/mermaid.mmd
-@@ -25,37 +25,37 @@ start((Start))
-     TOR: Request (2) TOI: Request ready (4) or harmonisation complete"]
-     
-     imCheck((IM: Check PathRequest Message))
-     
-     nextSteps["The next steps of the path request sequence follow."]
-     
-   
-     
-     start --> checkPaP
-     checkPaP -- Yes --> pathRequestPreBooking
-     checkPaP -- No --> pathRequestNo
-     pathRequestNo --> imCheck
-     pathRequestPreBooking --> cossReject
-     cossReject -- Yes --> cossDeletion 
-     cossReject -- No --> pathAfterPreBooking --> prebookingTrigger
-     prebookingTrigger -- Yes --> newPath --> imCheck
-     prebookingTrigger -- No --> imCheck
-     imCheck --> nextSteps
-     
-     classDef Blue fill:#2962FF;
-     classDef Green fill:#00C853;
-     
-     class imCheck Blue;
-     class checkPaP,pathRequestPreBooking,pathRequestNo Green;
+  
  
    click start href "Test#L11" "Start node code"
    click checkPaP href "Test#L13" "checkPaP code"
