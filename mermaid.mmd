@@ -1,11 +1,7 @@
 %%{init:{
   "theme":"base",
-  "themeCSS": "
-    .mermaid a{cursor:pointer;text-decoration:underline}
-    /* robust: trifft HTML- und SVG-Text */
-    .mermaid a span, .mermaid a { color:#dc2626; fill:#dc2626; }
-  ",
-  "flowchart": { "defaultRenderer":"elk" }
+  "flowchart":{"defaultRenderer":"elk","htmlLabels":true},
+  "themeCSS": ".mermaid a span { color:#dc2626 !important; }"
 }}%%
 
 flowchart TD
